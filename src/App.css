@@ -1,14 +1,10 @@
 
 body {
-  background-color: pink;
+  background-color: #e05a9d;
   margin: 0 !important;
   padding: 0 !important;
+  color:white;
   font-family: 'Roboto', sans-serif;
 }
 
 
-.header {
-padding: 40px;
-text-align: center;
-background: #f3e9f1;
-}

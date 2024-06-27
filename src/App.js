@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
 import axios from 'axios';
-import { Container, Grid, Typography, Divider, Box } from '@mui/material';
+import { Container, Typography, Divider, Box } from '@mui/material';
 import UserList from './Components/UserList';
 import UserDetails from './Components/UserDetails';
 import Header from './Components/Header';
@@ -13,6 +13,7 @@ function App() {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState('');
   const [loadingUserDetails, setLoadingUserDetails] = useState(false);
+  const [searchQuery, setSearchQuery] = useState('');
   const userDetailsRef = useRef(null);
 
   useEffect(() => {
@@ -39,7 +40,7 @@ function App() {
       setSelectedUser(user);
       setLoadingUserDetails(false);
       userDetailsRef.current.scrollIntoView({ behavior: 'smooth' });
-    }, 100); // Simulate loading delay
+    }, 100);
   };
 
   const shuffleUsers = (users) => {
@@ -61,6 +62,10 @@ function App() {
     return shuffledUsers;
   };
 
+  const filteredUsers = users.filter(user =>
+    user.profile.username.toLowerCase().includes(searchQuery.toLowerCase())
+  );
+
   if (loading) {
     return <Loader />;
   }
@@ -75,10 +80,14 @@ function App() {
 
   return (
     <Container>
-      <Header title="Users List" />
+      <Header title="Users List" searchQuery={searchQuery} setSearchQuery={setSearchQuery} />
       <Box display="flex">
         <Box flex={1}>
-          <UserList users={users} onUserSelect={handleUserSelect} />
+          {filteredUsers.length > 0 ? (
+            <UserList users={filteredUsers} onUserSelect={handleUserSelect} />
+          ) : (
+            <Typography variant="h6">No user found</Typography>
+          )}
         </Box>
         <Divider orientation="vertical" flexItem />
         <Box flex={2} ref={userDetailsRef}>

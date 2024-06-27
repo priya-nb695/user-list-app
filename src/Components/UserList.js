@@ -1,19 +1,25 @@
-
 import React from 'react';
-import { List, ListItem, ListItemAvatar, ListItemText, Avatar, ListItemSecondaryAction, IconButton, Divider } from '@mui/material';
-import { Typography } from '@mui/material';
+import { List, ListItem, ListItemAvatar, ListItemText, Avatar, ListItemSecondaryAction, IconButton, Divider, Typography } from '@mui/material';
 
 const UserList = ({ users, onUserSelect }) => {
   return (
     <List>
       {users.map((user, index) => (
         <React.Fragment key={user.id}>
-          <ListItem button onClick={() => onUserSelect(user)}>
+          <ListItem
+            button
+            onClick={() => onUserSelect(user)}
+            sx={{
+              '&:hover': {
+                backgroundColor: '#5f2c3e', 
+              },
+            }}
+          >
             <ListItemAvatar>
               <Avatar src={user.avatar} />
             </ListItemAvatar>
-            <ListItemText 
-              primary={`${user.profile.username}`} 
+            <ListItemText
+              primary={`${user.profile.username}`}
               secondary={
                 <>
                   <br />
@@ -21,11 +27,11 @@ const UserList = ({ users, onUserSelect }) => {
                     View Details
                   </Typography>
                 </>
-              } 
+              }
             />
             <ListItemSecondaryAction>
               <IconButton edge="end" onClick={() => onUserSelect(user)}>
-                {/* Optional: Add an icon here */}
+             
               </IconButton>
             </ListItemSecondaryAction>
           </ListItem>

@@ -1,4 +1,3 @@
-
 import React from 'react';
 import { Card, CardContent, Typography, Avatar, Box } from '@mui/material';
 import { styled } from '@mui/system';
@@ -8,7 +7,7 @@ const defaultAvatar = 'https://via.placeholder.com/150';
 const StyledCard = styled(Card)(({ theme }) => ({
   display: 'flex',
   flexDirection: 'row',
-  backgroundColor: '#fff',
+  backgroundColor: '#c8d8e4',
   borderRadius: '10px',
   boxShadow: '0 4px 8px rgba(0, 0, 0, 0.1)',
   border: '1px solid #ddd',
