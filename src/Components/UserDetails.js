@@ -6,7 +6,10 @@ const defaultAvatar = 'https://via.placeholder.com/150';
 
 const StyledCard = styled(Card)(({ theme }) => ({
   display: 'flex',
-  flexDirection: 'row',
+  flexDirection: 'column',
+  [theme.breakpoints.up('sm')]: {
+    flexDirection: 'row',
+  },
   backgroundColor: '#c8d8e4',
   borderRadius: '10px',
   boxShadow: '0 4px 8px rgba(0, 0, 0, 0.1)',
@@ -16,18 +19,29 @@ const StyledCard = styled(Card)(({ theme }) => ({
 const StyledAvatarContainer = styled(Box)(({ theme }) => ({
   display: 'flex',
   alignItems: 'center',
+  justifyContent: 'center',
   padding: theme.spacing(2),
   background: 'linear-gradient(135deg, #FFEB3B 30%, #000000 70%)',
+  [theme.breakpoints.up('sm')]: {
+    borderRadius: '10px 0 0 10px',
+  },
 }));
 
 const StyledAvatar = styled(Avatar)(({ theme }) => ({
   width: '150px',
   height: '150px',
-  borderRadius: '10px 0 0 10px',
+  borderRadius: '50%',
+  [theme.breakpoints.up('sm')]: {
+    width: '100px',
+    height: '100px',
+  },
 }));
 
 const StyledCardContent = styled(CardContent)(({ theme }) => ({
   padding: theme.spacing(2),
+  [theme.breakpoints.up('sm')]: {
+    padding: theme.spacing(4),
+  },
 }));
 
 const StyledTypography = styled(Typography)(({ theme }) => ({
@@ -38,7 +52,7 @@ const UserDetails = ({ user }) => {
   return (
     <StyledCard>
       <StyledAvatarContainer>
-        <StyledAvatar src={user.avatar } />
+        <StyledAvatar src={user.avatar || defaultAvatar} />
       </StyledAvatarContainer>
       <StyledCardContent>
         <StyledTypography variant="h4">
@@ -53,12 +67,11 @@ const UserDetails = ({ user }) => {
         <StyledTypography variant="body1">
           <strong>Email:</strong> {user.profile.email}
         </StyledTypography>
-    
         <StyledTypography variant="body1">
           <strong>Occupation:</strong> {user.jobTitle}
         </StyledTypography>
         <Typography variant="body1">
-          <strong>About me:</strong> {user.Bio}
+          <strong>About me:</strong> {user.bio}
         </Typography>
       </StyledCardContent>
     </StyledCard>
@@ -66,4 +79,5 @@ const UserDetails = ({ user }) => {
 };
 
 export default UserDetails;
+
 
